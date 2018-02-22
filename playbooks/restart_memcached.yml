@@ -1,0 +1,11 @@
+# These tasks are meant to restart memcache
+# on any target server.
+
+---
+- hosts: '{{ target_host }}'
+
+  tasks:
+  - name: Restart memcache service
+    win_shell: Restart-Service '{{ item }}'
+    with_items: '{{ memcached_services }}'
+

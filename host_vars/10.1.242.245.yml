@@ -1,0 +1,11 @@
+---
+ansible_user: 'seamkit@mtn.com.ng'
+ansible_password: 'Sys@dm1n321#'
+ansible_port: 5986
+ansible_connection: winrm
+ansible_winrm_server_cert_validation: ignore
+ansible_winrm_transport: credssp
+
+memcached_services:
+- MemCacheD_1
+- MemCacheD_2
