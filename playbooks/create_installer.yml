@@ -6,7 +6,7 @@
 
   vars:
     platform: '{{ platform }}'
-    env: '{{ environment }}'
+    environment: '{{ environment }}'
     package_url: '{{ package_url }}'
     contents_folder: '{{ contents_folder }}'
 
@@ -42,7 +42,6 @@
   
   - name: Run bitrock builder to package installer
     win_command: 'builder-cli build {{ bitrock_project_file }} {{ platform }}'
-    when: 1 == 2
   
   - name: Create final destination directory if it doesn't exist
     win_file:
