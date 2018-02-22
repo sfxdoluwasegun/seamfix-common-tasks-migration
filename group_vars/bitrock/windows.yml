@@ -1,4 +1,4 @@
-bitrock_folder: 'c:/sam/fix/installers/mtnsmartclient/mtnkyc/2.4/databases'
+bitrock_folder: 'c:/fix/installers/mtnsmartclient/mtnkyc/2.4/databases'
 bitrock_project_file: 'C:\fix\Installers\mtnsmartclient\smartclient-checks-and-balance.xml'
 bitrock_builder_path: 'C:\Program Files (x86)\BitRock InstallBuilder Enterprise 7.2.6\bin'
 bitrock_output_folder: 'C:\Users\Administrator\Documents\InstallBuilder\output'
