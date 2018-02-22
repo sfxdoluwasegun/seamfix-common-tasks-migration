@@ -1,0 +1,60 @@
+# These tasks are meant to create any installer and
+# upload the resulting installer package to an S3 bucket
+
+---
+- hosts: 52.32.139.234
+
+  vars:
+    platform: '{{ platform }}'
+    env: '{{ environment }}'
+    package_url: '{{ package_url }}'
+    contents_folder: '{{ contents_folder }}'
+
+  tasks:
+  - name: Include common role
+    include_role:
+      name: common
+
+  - name: Include vars of app specific config file
+    include_vars:
+      file: '../group_vars/bitrock/{{ platform }}.yml'
+  
+  - name: Download package using aria2
+    win_command: 'aria2c.exe -x 16 -o {{ platform }}-client.zip --allow-overwrite=true --continue=true --http-user=tower --http-passwd=X?X%&NHJNcSC4ke4 {{ package_url }}'
+    args:
+      chdir: '{{ temp_path }}'
+      
+  - name: Unzip package
+    win_unzip:
+      src: '{{ temp_path }}\{{ platform }}-client.zip'
+      dest: '{{ temp_path }}\{{ platform }}-client'
+    
+  - name: Copy extracted package contents to bitrock folder
+    win_copy:
+      src: '{{ temp_path }}\{{ platform }}-client\{{ contents_folder }}\'
+      dest: '{{ bitrock_folder }}\'
+      remote_src: True
+  
+  - name: Add bitrock bin folder to path environmnent variable
+    win_path:
+      elements:
+      - '{{ bitrock_builder_path }}'
+  
+  - name: Run bitrock builder to package installer
+    win_command: 'builder-cli build {{ bitrock_project_file }} {{ platform }}'
+    when: 1 == 2
+  
+  - name: Create final destination directory if it doesn't exist
+    win_file:
+      path: '{{ final_destination }}'
+      state: directory
+
+  - name: Copy packaged installer to final destination
+    win_copy:
+      src: '{{ bitrock_output_folder }}\{{ bitrock_output_file }}.{{ bitrock_output_file_extension }}'
+      dest: '{{ final_destination }}\{{ bitrock_output_file }}-{{ env }}-latest.{{ bitrock_output_file_extension }}'
+      remote_src: True
+
+  - name: Show installer download url
+    debug:
+      msg: '{{ final_destination_url }}/{{ bitrock_output_file }}-{{ env }}-latest.{{ bitrock_output_file_extension }}'

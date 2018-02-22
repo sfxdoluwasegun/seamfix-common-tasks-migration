@@ -1,0 +1,40 @@
+---
+# These tasks are meant to install common utilities
+# that would be required on the server.
+
+# Using aria2 instead of win_get_url as it offers way better 
+# download speeds due to it's use of multiple connections
+# while donwloading a file.
+- name: Set environment http_proxy on host
+  win_environment:
+    state: present
+    name: http_proxy
+    value: '{{ proxy_host }}:{{ proxy_port }}'
+    level: user
+  when: proxy_host is defined and proxy_port is defined
+- name: Set environment https_proxy on host
+  win_environment:
+    state: present
+    name: https_proxy
+    value: '{{ proxy_host }}:{{ proxy_port }}'
+    level: user
+  when: proxy_host is defined and proxy_port is defined
+- name: Check for common_installed file
+  win_stat:
+    path: 'C:\common_installed'
+  register: common_installed
+- name: Install common utilities
+  block:
+  - name: Install aria2
+    win_chocolatey:
+      name: aria2
+      state: present
+  - name: Create tmp directory if it doesn't exist
+    win_file:
+      path: 'C:\tmp'
+      state: directory
+  - name: Create common_installed file
+    win_copy:
+      content: ""
+      dest: 'C:\common_installed'
+  when: common_installed.stat.exists == false
