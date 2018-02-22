@@ -6,7 +6,7 @@
 
   vars:
     platform: '{{ platform }}'
-    environment: '{{ environment }}'
+    env: '{{ env }}'
     package_url: '{{ package_url }}'
     contents_folder: '{{ contents_folder }}'
 
@@ -51,9 +51,9 @@
   - name: Copy packaged installer to final destination
     win_copy:
       src: '{{ bitrock_output_folder }}\{{ bitrock_output_file }}.{{ bitrock_output_file_extension }}'
-      dest: '{{ final_destination }}\{{ bitrock_output_file }}-{{ environment }}-latest.{{ bitrock_output_file_extension }}'
+      dest: '{{ final_destination }}\{{ bitrock_output_file }}-{{ env }}-latest.{{ bitrock_output_file_extension }}'
       remote_src: True
 
   - name: Show installer download url
     debug:
-      msg: '{{ final_destination_url }}/{{ bitrock_output_file }}-{{ environment }}-latest.{{ bitrock_output_file_extension }}'
+      msg: '{{ final_destination_url }}/{{ bitrock_output_file }}-{{ env }}-latest.{{ bitrock_output_file_extension }}'
