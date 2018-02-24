@@ -9,3 +9,5 @@ ansible_winrm_transport: credssp
 memcached_services:
 - MemCacheD_1
 - MemCacheD_2
+- MemcacheD_backlist
+- MemcacheD_AppMock
