@@ -1,0 +1,6 @@
+# These tasks are meant to restart memcache
+# on any target server.
+
+---
+- hosts: '{{ target_host }}'
+
