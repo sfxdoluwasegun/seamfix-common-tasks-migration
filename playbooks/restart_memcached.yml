@@ -3,6 +3,7 @@
 
 ---
 - hosts: '{{ target_host }}'
+  serial: 10
 
   tasks:
   - name: Restart memcache service
