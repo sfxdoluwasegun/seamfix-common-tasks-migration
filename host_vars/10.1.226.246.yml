@@ -7,7 +7,9 @@ ansible_winrm_server_cert_validation: ignore
 ansible_winrm_transport: credssp
 
 memcached_services:
-- MemCacheD_1
-- MemCacheD_2
-- MemcacheD_backlist
-- MemcacheD_AppMock
+- KycMemcached00
+- KycMemcached01
+- KycMemcached02
+- KycMemcached03
+- KycMemcached04
+- KycMemcached05
