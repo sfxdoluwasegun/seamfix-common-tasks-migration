@@ -1,0 +1,20 @@
+---
+types:
+- name: biosmart_full
+  bitrock_folder: 'c:/fix/installers/mtnsmartclient/mtnkyc/2.4/databases'
+  bitrock_project_file: 'C:\fix\Installers\mtnsmartclient\smartclient-checks-and-balance.xml'
+  bitrock_builder_path: 'C:\Program Files (x86)\BitRock InstallBuilder Enterprise 7.2.6\bin'
+  bitrock_output_folder: 'C:\Users\Administrator\Documents\InstallBuilder\output'
+  bitrock_output_file: 'smartclient-2.0-windows-installer'
+  bitrock_output_file_extension: 'exe'
+  final_destination: 'C:\fix\sw\nginx\html\installers'
+  final_destination_url: 'https://teampass.seamfix.com:8443/installers'
+- name: biosmart_update
+  bitrock_folder: 'c:/fix/installers/mtnsmartclient/mtnkyc/2.4/databases'
+  bitrock_project_file: 'C:\fix\Installers\mtnsmartclient\smartclient-checks-and-balance.xml'
+  bitrock_builder_path: 'C:\Program Files (x86)\BitRock InstallBuilder Enterprise 7.2.6\bin'
+  bitrock_output_folder: 'C:\Users\Administrator\Documents\InstallBuilder\output'
+  bitrock_output_file: 'smartclient-2.0-windows-installer'
+  bitrock_output_file_extension: 'exe'
+  final_destination: 'C:\fix\sw\nginx\html\installers'
+  final_destination_url: 'https://teampass.seamfix.com:8443/installers'
