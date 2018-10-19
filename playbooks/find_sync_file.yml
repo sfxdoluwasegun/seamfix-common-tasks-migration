@@ -11,7 +11,7 @@
     async: 5000
     poll: 1
     win_find:
-      paths: '\\{{ item }}\{{ path }}'
+      paths: '\\{{ item }}\fix\_bio\receivedfiles'
       hidden: yes
       patterns: [ file_name ]
       recurse: yes
