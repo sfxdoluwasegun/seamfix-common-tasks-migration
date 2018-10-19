@@ -1,6 +1,6 @@
 ---
 ansible_user: 'seamkit2@mtn.com.ng'
-ansible_password: '*W3lc0m3@5432#'
+ansible_password: 'Welcome123@#'
 ansible_port: 5986
 ansible_connection: winrm
 ansible_winrm_server_cert_validation: ignore
