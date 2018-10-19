@@ -2,5 +2,45 @@
 # on any target server.
 
 ---
-- hosts: '{{ target_host }}'
+- name: Create user
+  hosts: '{{ target_host }}'
+  become: true
+
+  tasks:
+  - name: Create system_admin group if it doesn't exist
+    group:
+      name: system_admin
+      state: present
+  
+  - name: Add admin group to sudoers
+    lineinfile: dest=/etc/sudoers regexp="^%{{ admin_group }}" line="%{{ admin_group }} ALL=(ALL) NOPASSWD:ALL"
+
+  - name: Disable Requiretty from sudoers
+    lineinfile: dest=/etc/sudoers regexp="Defaults    requiretty" line="#Defaults    requiretty"
+
+  - name: Create user
+    user:
+      name: "{{ username }}"
+      state: present
+      shell: "{{ shell | default('/bin/bash') }}"
+      group: "{{ admin_group | default('system_admin')}}"
+
+  - name: Add SSH-keys to users
+    authorized_key:
+      user: "{{ username }}"
+      key: "{{ key }}"
+
+  - name: Add user to AllowUsers
+    replace:
+      backup: yes
+      dest: /etc/ssh/sshd_config
+      regexp: '^(AllowUsers(?!.*\b{{ item.username }}\b).*)$'
+      replace: '\1 {{ item.username }}'
+    with_items: "{{ linuxusers }}"
+
+  - name: SSHD Restart
+    service:
+      name: sshd
+      state: restarted
+      enabled: yes
 

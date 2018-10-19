@@ -1,6 +1,6 @@
 ---
 ansible_user: 'seamkit2@mtn.com.ng'
-ansible_password: '*W3lc0m3@5432#'
+ansible_password: 'Welcome123@#'
 ansible_port: 5986
 ansible_connection: winrm
 ansible_winrm_server_cert_validation: ignore
@@ -13,3 +13,16 @@ memcached_services:
 - KycMemcache004
 - KycMemcache005
 - KycMemcache006
+
+sftp_locations:
+- 172.16.5.237
+- 172.16.5.240
+- 172.16.5.241
+- 172.16.5.242
+- 172.16.8.233
+- 172.16.111.222
+- 172.16.111.223
+- 172.16.111.224
+- 172.16.111.225
+- 172.16.8.232
+- 172.16.8.233
