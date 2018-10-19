@@ -16,3 +16,8 @@
       patterns: [ file_name ]
       recurse: yes
     with_items: '{{ sftp_locations }}'
+    register: search_result
+  
+  - name: Show results
+    debug:
+      var: search_result
